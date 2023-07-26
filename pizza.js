@@ -17,8 +17,6 @@ let pizza = {
         }
   } || JSON.parse(localStorage.getItem('pizza')) ;
 
-localStorage.setItem('pizza', JSON.stringify(pizza));
-
 
 // function to hide food dropdown lists and disable buttons until allergy info is submitted
 function hideAndDisable() {
@@ -104,68 +102,6 @@ function noGluten() {
   // remove bbq
   gluten.remove(1);
 }
-
-const randomizerBtn = document.getElementById('random-btn');
-const createBtn = document.getElementById('create-btn');
-
-// removes disabled button and allow user to click
-function addCreateBtns() {
-  randomizerBtn.disabled = false;
-  createBtn.disabled = false;
-}
-
-function addOrderBTN2() {
-  const order2 = document.getElementById('order-2')
-  order2.classList.remove('hide-me')
-  order2.classList.add('order2-btn')
-
-  const pickAgain = document.getElementById('pick-btn')
-  pickAgain.classList.remove('hide-me')
-  pickAgain.classList.add('pick-again-btn')
-}
-
-// function removes allergy dropdown list
-function removeAllergy() {
-  const allergyDropdown = document.getElementById("allergy");
-  allergyDropdown.classList.add("hide-me");
-  const allergyLabel = document.getElementById("allergy-label")
-  allergyLabel.classList.add("hide-me");
-}
-
-// function removes intro p element
-function removeIntro() {
-  const intro = document.getElementById('intro')
-  intro.classList.add('hide-me');
-}
-
-// function removes create and randomizer buttons
-function removeBtns() {
-  randomizerBtn.classList.remove('random-btn');
-  randomizerBtn.classList.add('hide-me');
-  createBtn.classList.remove('create-btn');
-  createBtn.classList.add('hide-me');
-}
-
-// removes allergy dropdown, buttons and intro p element after click and creates random pizza
-randomizerBtn.addEventListener('click', function() {
-  const table = document.getElementById('food-table')
-  table.classList.add('hide-me')
-  removeAllergy();
-  removeIntro();
-  removeBtns();
-  addOrderBTN2();
-});
-
-// removes allergy dropdown, buttons and intro p element after click and adds food dropdown lists
-createBtn.addEventListener('click', function() {
-  removeAllergy();
-  removeIntro();
-  removeBtns();
-  addFood();
-  addOrderBTN();
-  addResetBTN();
-});
-
 
 // random selection function
 function randomizer() {
@@ -322,35 +258,10 @@ function randomizer() {
     pizza.top4.type = "Egg";
     pizza.top4.cost = 2
   }
+  localStorage.setItem('pizza', JSON.stringify(pizza));
   getTotal();
 };
 
-// adds food dropdowns
-function addFood() {
-const foodArray = document.getElementsByClassName("food");
-// loops through elements with food class name, then adds new class to make dropdowns visible using css
-  for (let i = 0; i < foodArray.length; i++) {
-    foodArray[i].classList.remove("hide-me");
-    foodArray[i].classList.add("show-me");
-  }
-}
-
-const resetButton = document.getElementById('reset-order');
-
-// adds reset button
-function addResetBTN() {
-  resetButton.classList.remove('hide-me')
-  resetButton.classList.add('reset-btn')
-}
-
-const orderButton = document.getElementById('submit-order');
-
-// adds order button
-function addOrderBTN() {
-  orderButton.classList.remove('hide-me')
-  orderButton.classList.add('order-btn')
-  orderButton.disabled = true;
-}
 
 const baseChoice = document.getElementById('base');
 const base = document.getElementById("pizza-img");
@@ -389,6 +300,7 @@ baseChoice.addEventListener("change", function () {
     pizza.base.type = "CFG Special";
     pizza.base.cost = 2;
   }
+  localStorage.setItem('pizza', JSON.stringify(pizza));
   getTotal();
 });
 
@@ -442,6 +354,7 @@ top1Choice.addEventListener("change", function () {
     pizza.top1.type = "None"
     pizza.top1.cost = 0
   }
+  localStorage.setItem('pizza', JSON.stringify(pizza));
   getTotal();
   });
 
@@ -503,6 +416,7 @@ top2Choice.addEventListener("change", function () {
     pizza.top2.type = "None";
     pizza.top2.cost = 0
   }
+  localStorage.setItem('pizza', JSON.stringify(pizza));
   getTotal();
 });
 
@@ -564,6 +478,7 @@ top3Choice.addEventListener("change", function () {
     pizza.top3.type = "None";
     pizza.top3.cost = 0
   }
+  localStorage.setItem('pizza', JSON.stringify(pizza));
   getTotal();
 });
 
@@ -635,13 +550,97 @@ top4Choice.addEventListener("change", function () {
     pizza.top4.type = "None";
     pizza.top4.cost = 0
   }
+  localStorage.setItem('pizza', JSON.stringify(pizza));
   getTotal();
 });
 
+// gets total and displays in top right 
 function getTotal() {
   const total = (pizza.base.cost + pizza.top1.cost + pizza.top2.cost + pizza.top3.cost + pizza.top4.cost)
   document.getElementById('total').innerHTML = `total: £${total}`;
 }
+
+// create and randomizer button functions...
+// removes allergy dropdown, buttons and intro p element after click then add cfg pick and order button
+const randomizerBtn = document.getElementById('random-btn');
+randomizerBtn.addEventListener('click', function() {
+  const table = document.getElementById('food-table')
+  table.classList.add('hide-me')
+  removeAllergyIntro();
+  removeBtns();
+  addOrderBTN2();
+});
+
+// removes allergy dropdown, buttons and intro p element after click and adds food dropdown lists, reset and order buttons
+const createBtn = document.getElementById('create-btn');
+createBtn.addEventListener('click', function() {
+  removeAllergyIntro();
+  removeBtns();
+  addFood();
+  addOrderBTN();
+  addResetBTN();
+});
+
+// called once allergy is selected from dropdown
+function addCreateBtns() {
+  randomizerBtn.disabled = false;
+  createBtn.disabled = false;
+}
+
+// function removes allergy dropdown list and intro once user has selected create or randomizer
+function removeAllergyIntro() {
+  const allergyDropdown = document.getElementById("allergy");
+  allergyDropdown.classList.add("hide-me");
+  const allergyLabel = document.getElementById("allergy-label")
+  allergyLabel.classList.add("hide-me");
+  const intro = document.getElementById('intro')
+  intro.classList.add('hide-me');
+}
+
+// function removes create and randomizer buttons
+function removeBtns() {
+  randomizerBtn.classList.remove('random-btn');
+  randomizerBtn.classList.add('hide-me');
+  createBtn.classList.remove('create-btn');
+  createBtn.classList.add('hide-me');
+}
+
+// adds order button for randomizer
+function addOrderBTN2() {
+  const order2 = document.getElementById('order-2')
+  order2.classList.remove('hide-me')
+  order2.classList.add('order2-btn')
+
+  const pickAgain = document.getElementById('pick-btn')
+  pickAgain.classList.remove('hide-me')
+  pickAgain.classList.add('pick-again-btn')
+}
+
+// adds food dropdowns
+function addFood() {
+  const foodArray = document.getElementsByClassName("food");
+  // loops through elements with food class name, then adds new class to make dropdowns visible using css
+    for (let i = 0; i < foodArray.length; i++) {
+      foodArray[i].classList.remove("hide-me");
+      foodArray[i].classList.add("show-me");
+    }
+  }
+  
+// adds reset button
+const resetButton = document.getElementById('reset-order');
+function addResetBTN() {
+  resetButton.classList.remove('hide-me')
+  resetButton.classList.add('reset-btn')
+}
+  
+// adds order button
+const orderButton = document.getElementById('submit-order');
+function addOrderBTN() {
+  orderButton.classList.remove('hide-me')
+  orderButton.classList.add('order-btn')
+  orderButton.disabled = true;
+}
+
 
 const pick = document.getElementById('pick-btn')
 pick.addEventListener('click', function() {
@@ -650,11 +649,13 @@ pick.addEventListener('click', function() {
   randomizer();
 })
 
-const resetBtn = document.getElementById('reset-order')
 
+// reset button function
+const resetBtn = document.getElementById('reset-order')
 resetBtn.addEventListener('click', reset) 
 
 function reset() {
+  localStorage.removeItem('pizza');
   // reset order inside object
   pizza.base.type = "";
   pizza.top1.type = "";
@@ -667,8 +668,6 @@ function reset() {
   pizza.top3.cost = 0;
   pizza.top4.cost = 0;
   pizza.total = 0;
-
-  localStorage.removeItem('pizza');
   // enable dropdown selection
   baseChoice.disabled = false;
   top1Choice.disabled = false;
@@ -693,21 +692,17 @@ function reset() {
   document.getElementById('top4-space').innerHTML = ""
 };
 
-const order = document.getElementById('submit-order');
 // displays order total on page 
+const order = document.getElementById('submit-order');
 order.addEventListener('click', function (){
-   // display order page and remove food dropdowns after 1 second
   setTimeout(orderPage, 1000);
-  setTimeout(hide, 1000);
      }   
 );
 
+// displays order total on page after 1 second
 const order2 = document.getElementById('order-2');
-// displays order total on page 
 order2.addEventListener('click', function (){
-  // display order page and remove food dropdowns after 1 second
   setTimeout(orderPage, 1000);
-  setTimeout(hide, 1000);
      }   
 );
 
@@ -726,25 +721,6 @@ function orderPage() {
   document.getElementById('total5').innerHTML = `${pizza.top4.type}: £${pizza.top4.cost}`;
   document.getElementById('total6').innerHTML = `Your total is £${total}`;
 }
-
-
-function hide() {
-const foodList = document.getElementsByClassName("food");
-  for (let i = 0; i < foodList.length; i++) {
-    foodList[i].classList.remove("show-me");
-    foodList[i].classList.add("hide-me");
-   }
-    resetButton.classList.add('hide-me')
-    resetButton.classList.remove('reset-btn')
-    orderButton.classList.add('hide-me')
-    orderButton.classList.remove('order-btn')
-  };
-
-  function hideOrder() {
-    const basket = document.getElementById('dropdown-content')
-    basket.classList.remove('show')
-    basket.classList.add('dropdown-content')
-  }
 
  
 
