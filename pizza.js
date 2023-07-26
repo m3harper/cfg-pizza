@@ -699,7 +699,7 @@ order.addEventListener('click', function (){
      }   
 );
 
-// displays order total on page after 1 second
+// displays order on page after 1 second
 const order2 = document.getElementById('order-2');
 order2.addEventListener('click', function (){
   setTimeout(orderPage, 1000);
