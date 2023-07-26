@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>CFG Pizza</title>
+
+  <link rel="stylesheet" href="/pizza.css"></link>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com"> 
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <div id="border-container">
+
+    <p id="total">total: £0</p>
+    
+    <div class="order-container">
+      
+      <div id="order-content" class="order-content">
+        <p id="thanks"></p>
+        <p id="total1"></p>
+        <p id="total2"></p>
+        <p id="total3"></p>
+        <p id="total4"></p>
+        <p id="total5"></p>
+        <p id="total6"></p>
+      </div>
+
+    </div>
+
+    <h1>cfg pizza</h1>
+
+    <p id="allergy-label" class="allergy-label-style">Please submit allergy info:</p>
+
+    <select name="allergy-select" id="allergy" class="allergy-dropdown-style">
+      <option>----------</option>
+      <option>None</option>
+      <option>Nut</option>
+      <option>Dairy</option>
+      <option>Shellfish</option>
+      <option>Gluten</option>
+    </select>
+
+   <div id="food-container">
+
+    <p id="intro" class="intro">Click create to get started. Can't decide?<br>Let us help with our pizza randomizer!</p>
+
+
+    <button id="create-btn" class="create-btn">Create</button>
+    <button id="random-btn" class="random-btn">Randomizer</button>
+    
+
+    <select name="base-select" id="base" class="food">
+      <option class="content">--Select your base--</option>
+      <option class="content">Tomato</option> 
+      <option class="content">White Sauce</option> 
+      <option class="content">BBQ Sauce</option> 
+      <option class="content">CFG Special</option> 
+    </select>
+  
+    <select name="top1-select" id="top1" class="food">
+      <option class="content">--Select topping 1--</option>
+      <option class="content">Mozzerella</option> 
+      <option class="content">Gouda</option> 
+      <option class="content">Cheddar</option> 
+      <option class="content">Lacto Free</option>
+      <option class="content">None</option> 
+    </select>
+
+    <select name="top2-select" id="top2" class="food">
+      <option class="content">--Select topping 2--</option>
+      <option class="content">Tomatoes</option>  
+      <option class="content">Mushrooms</option> 
+      <option class="content">Onion</option> 
+      <option class="content">Peppers</option> 
+      <option class="content">Sweetcorn</option> 
+      <option class="content">None</option>
+    </select>
+
+    <select name="top3-select" id="top3" class="food">
+      <option class="content">--Select topping 3--</option>
+      <option class="content">Pepperoni</option> 
+      <option class="content">Chicken</option> 
+      <option class="content">Pulled Pork</option> 
+      <option class="content">Spicy Beef</option> 
+      <option class="content">Tuna</option> 
+      <option class="content">None</option> 
+    </select>
+
+    <select name="top4-select" id="top4" class="food">
+      <option class="content">--Select topping 4--</option>
+      <option class="content">Aubergine</option>
+      <option class="content">Pineapple</option>
+      <option class="content">Jalapenos</option> 
+      <option class="content">Olives</option>  
+      <option class="content">Egg</option> 
+      <option class="content">None</option> 
+    </select>
+
+   
+ 
+  </div>
+
+  <div>
+    <button id="submit-order">Order</button>
+    <button id="reset-order">Reset</button>
+  </div>
+  
+    <img src = "/pizza-2.png" id="pizza-img" width="220"> 
+
+    
+  <table id="food-table">
+    <tr>
+      <td id="top1-space"></td>
+      <td id="top2-space"></td>
+    </tr>
+    <tr>
+      <td id="top3-space"></td>
+      <td id="top4-space"></td>
+    </tr>
+  </table>
+  
+    
+      <button id="order-2" class="hide-me">Order</button>
+      <button id="pick-btn" class="hide-me">CFG Pick</button>
+    
+</div>
+</div>
+</body>
+
+
+<script src='/pizza-random.js'></script>
+
+</html>
