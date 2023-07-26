@@ -290,6 +290,7 @@ tr, td {
   cursor: pointer;
 }
 
+/* pick again button */
 .pick-again-btn {
   display: inline-block;
   position: absolute;
